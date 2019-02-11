@@ -1,0 +1,55 @@
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+class Navbar extends Component {
+  render() {
+    return (
+      <div>
+        <nav className="uk-navbar-container" uk-navbar="true">
+          <div className="uk-navbar-left">
+            <Logo />
+
+            <div className="uk-navbar-item">
+              <form action="javascript:void(0)">
+                <input className="uk-input uk-form-width-small" type="text" placeholder="Input" />
+                  <button className="uk-button uk-button-default">Button</button>
+              </form>
+            </div>
+          </div>
+
+          <div className="uk-navbar-right">
+            <ul className="uk-navbar-nav">
+              <li className="uk-active">
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/dash/">Dashboard</Link>
+                <div className="uk-navbar-dropdown">
+                  <ul className="uk-nav uk-navbar-dropdown-nav">
+                    <li><Link to="/sw/">Star wars</Link></li>
+                    <li><Link to="/cats/">Cats</Link></li>
+                    <li><Link to="/punks/">Punks</Link></li>
+                  </ul>
+                </div>
+              </li>
+              <li><Link to="/settings">Settings</Link></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    )
+  }
+}
+
+export default Navbar;
+
+
+class Logo extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Link to="/" className="uk-navbar-item uk-logo">Home</Link>
+      </React.Fragment>
+    )
+  }
+}
