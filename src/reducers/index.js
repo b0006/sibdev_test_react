@@ -1,15 +1,31 @@
-const initialState = {
-  swPeople: []
-};
+// const initialState = {
+//   swPeople: [],
+//   isLoggedIn: false
+// };
+//
+// const reducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case 'SW_PEOPLE_LOADED': {
+//
+//     }
+//     case 'AUTH_LOGIN': {
+//       return state.isLoggedIn;
+//     }
+//     default:
+//       return state;
+//   }
+// };
+//
+// export default reducer;
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SW_PEOPLE_LOADED': {
+import { combineReducers } from 'redux';
 
-    }
-    default:
-      return state;
-  }
-};
+import { authentication } from './auth';
+import { swapi } from './swapi';
 
-export default reducer;
+const rootReducer = combineReducers({
+  authentication,
+  swapi
+});
+
+export default rootReducer;

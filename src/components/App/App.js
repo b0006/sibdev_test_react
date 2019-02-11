@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import { Route, Switch } from 'react-router-dom';
+import { StartPage, LoginPage } from '../pages';
 import Navbar from '../Navbar';
-import StartPage from '../pages/StartPage';
-import LoginPage from '../pages/LoginPage';
-import DashboardPage from '../pages/DashboardPage';
+// import { AuthServiceProvider } from "../context";
+// import AuthStoreService from "../../services/auth";
+
+// const authStoreService = new AuthStoreService();
 
 class App extends Component {
   render() {
-    return(
-      <Router>
-        <div className="uk-container">
-          <Navbar />
-          <Route path="/" exact component={StartPage} />
-          <Route path="/login" exact component={LoginPage} />
-          <Route path="/dash/" exact component={DashboardPage} />
-        </div>
-      </Router>
-
-    )
+    return (
+      <div className="uk-container">
+        <Navbar />
+        <Switch>
+          <Route path="/" exact render={() => (
+              <StartPage />
+          )} />
+          <Route path="/login" component={LoginPage} />
+          {/*<Route path="/login" render={() => (*/}
+            {/*<AuthServiceProvider value={authStoreService}>*/}
+              {/*<LoginPage />*/}
+            {/*</AuthServiceProvider>*/}
+          {/*)} />*/}
+        </Switch>
+      </div>
+    );
   }
 }
 

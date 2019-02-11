@@ -1,5 +1,7 @@
-import withSwapiService from './swapi/withSwapiService';
+import withSwapiService from './withSwapiService';
+import withAuthService from './withAuthService';
 
 export {
-  withSwapiService
+  withSwapiService,
+  withAuthService
 };

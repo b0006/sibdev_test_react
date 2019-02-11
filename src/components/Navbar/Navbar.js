@@ -7,7 +7,7 @@ class Navbar extends Component {
       <div>
         <nav className="uk-navbar-container" uk-navbar="true">
           <div className="uk-navbar-left">
-            <Logo />
+            <Link to="/" className="uk-navbar-item uk-logo">Home</Link>
 
             <div className="uk-navbar-item">
               <form action="javascript:void(0)">
@@ -42,14 +42,3 @@ class Navbar extends Component {
 }
 
 export default Navbar;
-
-
-class Logo extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <Link to="/" className="uk-navbar-item uk-logo">Home</Link>
-      </React.Fragment>
-    )
-  }
-}
