@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
+  onLogout = () => {
+
+  };
+
   render() {
     return (
       <div>
@@ -33,6 +37,7 @@ class Navbar extends Component {
                 </div>
               </li>
               <li><Link to="/settings">Settings</Link></li>
+              <li onClick={this.onLogout}><a>Logout</a></li>
             </ul>
           </div>
         </nav>

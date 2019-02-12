@@ -12,26 +12,9 @@ const logout = () => {
   localStorage.removeItem('user');
 };
 
-export const authService = {
-  login,
-  logout
+const test = () => {
+  console.log('TEST');
 };
-
-// export default class AuthService {
-//   static login = async (login, password) => {
-//     console.log('LOGIN');
-//     const hash = await hasCode(password);
-//     localStorage.setItem('user', JSON.stringify({
-//       login: login,
-//       password: hash
-//     }));
-//   };
-//
-//   static logout = () => {
-//     console.log('LOGOUT');
-//     localStorage.removeItem('user');
-//   };
-// }
 
 function hasCode(str) {
   let strBuf = new TextEncoder('utf-8').encode(str);
@@ -47,4 +30,10 @@ function hasCode(str) {
       }
       return result;
     });
+}
+
+export {
+  login,
+  logout,
+  test
 }

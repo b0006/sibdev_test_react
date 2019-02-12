@@ -5,21 +5,20 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './components/App';
 import ErrorBoundry from './components/ErrorBoundry';
-import SwapiStoreService from './services/swapi';
-import { SwapiServiceProvider } from './components/context';
-
 import store from './store';
 
-const swapiStoreService = new SwapiStoreService();
+import { AuthServiceProvider } from "./components/context";
+import * as authStoreService from "./services/auth";
+// const authStoreService = new AuthService();
 
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundry>
-      <SwapiServiceProvider value={swapiStoreService}>
-        <Router>
+      <Router>
+        <AuthServiceProvider value={authStoreService}>
           <App />
-        </Router>
-      </SwapiServiceProvider>
+        </AuthServiceProvider>
+      </Router>
     </ErrorBoundry>
   </Provider>,
   document.getElementById('root')

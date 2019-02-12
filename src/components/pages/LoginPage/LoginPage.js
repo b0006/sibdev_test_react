@@ -3,21 +3,12 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withAuthService } from '../../hoc';
 
-import * as actions from '../../../actions';
-
 class LoginPage extends Component {
-  constructor(props) {
-    super(props);
-
-    // reset login status
-    this.props.dispatch(actions.logout());
-
-    this.state = {
-      login: '',
-      password: '',
-      submitted: false
-    };
-  }
+  state = {
+    login: '',
+    password: '',
+    submitted: false
+  };
 
   componentDidMount() {
 
@@ -41,16 +32,11 @@ class LoginPage extends Component {
     this.setState({ submitted: true });
 
     const { login, password } = this.state;
-    const { dispatch } = this.props;
+    const { authStoreService } = this.props;
 
     if (login && password) {
-      dispatch(actions.login(login, password));
+      authStoreService.login(login, password);
     }
-
-    // const { authStoreService } = this.props;
-    // const { login, password } = this.state;
-    //
-
   };
 
   render() {
@@ -101,10 +87,5 @@ function mapStateToProps(state) {
   };
 }
 
-
-// const mapStateToProps = ({isLoggedIn}) => {
-//   return { isLoggedIn }
-// };
-
-export default connect(mapStateToProps)(LoginPage);
+export default withAuthService()(connect(mapStateToProps)(LoginPage));
 

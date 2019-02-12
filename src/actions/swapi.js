@@ -1,8 +1,12 @@
+import { swapiConstants } from '../constants';
+
 const swPeopleLoaded = (newPeoples) => {
   return {
-    type: 'SW_PEOPLE_LOADED',
+    type: swapiConstants.SW_PEOPLE_LOADED,
     payload: newPeoples
   }
 };
 
-export default swPeopleLoaded;
+export {
+  swPeopleLoaded
+};

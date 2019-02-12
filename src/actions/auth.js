@@ -1,10 +1,11 @@
-import { authService } from '../services';
+import { AuthService } from '../services';
+import { authConstants } from '../constants';
 
 function login(username, password) {
   return dispatch => {
     dispatch(request({ username }));
 
-    authService.login(username, password)
+    AuthService.login(username, password)
       .then(
         user => {
           dispatch(success(user));
@@ -15,14 +16,14 @@ function login(username, password) {
       );
   };
 
-  function request(user) { return { type: 'USERS_LOGIN_REQUEST', user } }
-  function success(user) { return { type: 'USERS_LOGIN_SUCCESS', user } }
-  function failure(error) { return { type: 'USERS_LOGIN_FAILURE', error } }
+  function request(user) { return { type: authConstants.LOGIN_REQUEST, user } }
+  function success(user) { return { type: authConstants.LOGIN_SUCCESS, user } }
+  function failure(error) { return { type: authConstants.LOGIN_FAILURE, error } }
 }
 
 function logout() {
-  authService.logout();
-  return { type: 'USERS_LOGOUT' };
+  AuthService.logout();
+  return { type: authConstants.LOGOUT };
 }
 
 export {
