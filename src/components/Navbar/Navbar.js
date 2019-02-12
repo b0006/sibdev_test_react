@@ -11,25 +11,23 @@ class Navbar extends Component {
   };
 
   render() {
+    const { loggedIn, user } = this.props;
+
+    const loginLink = !loggedIn ?
+      <li><Link to="/login">Login</Link></li> : null;
+    const logoutLink = loggedIn ?
+      <li onClick={this.onLogout}><a>{user.login}, logout</a></li> : null;
+
     return (
       <div>
         <nav className="uk-navbar-container" uk-navbar="true">
           <div className="uk-navbar-left">
             <Link to="/" className="uk-navbar-item uk-logo">Home</Link>
-
-            <div className="uk-navbar-item">
-              <form action="javascript:void(0)">
-                <input className="uk-input uk-form-width-small" type="text" placeholder="Input" />
-                  <button className="uk-button uk-button-default">Button</button>
-              </form>
-            </div>
           </div>
 
           <div className="uk-navbar-right">
             <ul className="uk-navbar-nav">
-              <li className="uk-active">
-                <Link to="/login">Login</Link>
-              </li>
+              { loginLink }
               <li>
                 <Link to="/dash/">Dashboard</Link>
                 <div className="uk-navbar-dropdown">
@@ -41,7 +39,7 @@ class Navbar extends Component {
                 </div>
               </li>
               <li><Link to="/settings">Settings</Link></li>
-              <li onClick={this.onLogout}><a>Logout</a></li>
+              { logoutLink }
             </ul>
           </div>
         </nav>
@@ -51,9 +49,10 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { loggedIn } = state.authentication;
+  const { loggedIn, user } = state.authentication;
   return {
-    loggedIn
+    loggedIn,
+    user
   };
 };
 

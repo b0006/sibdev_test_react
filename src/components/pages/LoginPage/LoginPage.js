@@ -7,8 +7,7 @@ import { authActions } from "../../../actions";
 class LoginPage extends Component {
   state = {
     login: '',
-    password: '',
-    submitted: false
+    password: ''
   };
 
   onLogin = (event) => {
@@ -26,8 +25,6 @@ class LoginPage extends Component {
   onSubmit = (event) => {
     event.preventDefault();
 
-    this.setState({ submitted: true });
-
     const { login, password } = this.state;
     const { signIn } = this.props;
 
@@ -36,13 +33,9 @@ class LoginPage extends Component {
     }
   };
 
-  onChange = () => {
-    console.log(this.props);
-  };
-
   render() {
-    const { isLoggedIn } = this.props;
-    if(isLoggedIn) {
+    const { loggedIn } = this.props;
+    if(loggedIn) {
       return <Redirect to="/" />
     }
 
@@ -82,9 +75,10 @@ class LoginPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { loggedIn } = state.authentication;
+  const { loggedIn, user } = state.authentication;
   return {
-    loggedIn
+    loggedIn,
+    user
   };
 };
 

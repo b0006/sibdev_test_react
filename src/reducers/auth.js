@@ -18,9 +18,7 @@ const authentication = (state = initialState, action) => {
     case authConstants.LOGIN_FAILURE:
       return {};
     case authConstants.LOGOUT:
-      return {
-        loggedIn: false
-      };
+      return {};
     default:
       return state
   }

@@ -16,8 +16,8 @@ function signIn(username, password) {
       );
   };
 
-  function request(user) { return { type: authConstants.LOGIN_REQUEST, user } }
-  function success(user) { return { type: authConstants.LOGIN_SUCCESS, user } }
+  function request(user) {  console.log('request'); console.log(user); return { type: authConstants.LOGIN_REQUEST, user } }
+  function success(user) { console.log('success');  console.log(user); return { type: authConstants.LOGIN_SUCCESS, user } }
   function failure(error) { return { type: authConstants.LOGIN_FAILURE, error } }
 }
 

@@ -1,14 +1,17 @@
 const signIn = async (login, password) => {
-  console.log('LOGIN');
   const hash = await hasCode(password);
   localStorage.setItem('user', JSON.stringify({
     login: login,
     password: hash
   }));
+
+  return {
+    login: login,
+    password: hash
+  }
 };
 
 const logout = () => {
-  console.log('LOGOUT');
   localStorage.removeItem('user');
 };
 
