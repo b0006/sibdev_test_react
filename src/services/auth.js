@@ -1,23 +1,21 @@
-const signIn = async (login, password) => {
-  const hash = await hasCode(password);
-  localStorage.setItem('user', JSON.stringify({
-    login: login,
-    password: hash
-  }));
+export default class AuthService {
+  static signIn = async (login, password) => {
+    const hash = await hasCode(password);
+    localStorage.setItem('user', JSON.stringify({
+      login: login,
+      password: hash
+    }));
 
-  return {
-    login: login,
-    password: hash
-  }
-};
+    return {
+      login: login,
+      password: hash
+    }
+  };
 
-const logout = () => {
-  localStorage.removeItem('user');
-};
-
-const test = () => {
-  console.log('TEST');
-};
+  static logout = () => {
+    localStorage.removeItem('user');
+  };
+}
 
 function hasCode(str) {
   let strBuf = new TextEncoder('utf-8').encode(str);
@@ -33,10 +31,4 @@ function hasCode(str) {
       }
       return result;
     });
-}
-
-export {
-  signIn,
-  logout,
-  test
 }

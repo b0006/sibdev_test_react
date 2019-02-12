@@ -1,5 +1,5 @@
-import * as AuthService from './auth';
-import * as SwapiService from './swapi';
+import AuthService from './auth';
+import SwapiService from './swapi';
 
 export {
   AuthService,

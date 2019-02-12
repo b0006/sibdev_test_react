@@ -1,11 +1,14 @@
 import { SwapiService } from '../services';
 import { swapiConstants } from '../constants';
+const swapiStoreService = new SwapiService();
 
 function getPersons() {
   return dispatch => {
     dispatch(request());
 
-    SwapiService.getPersons()
+    swapiStoreService.
+
+    swapiStoreService.getPersons()
       .then(
         swPeople => {
           dispatch(success(swPeople));

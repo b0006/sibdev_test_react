@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withSwapiService } from '../hoc';
 import { swapiActions } from "../../actions";
 
 import DashboardItem from '../DashboardItem';
@@ -40,5 +39,5 @@ const mapDispatchToProps = {
   getPersons: swapiActions.getPersons
 };
 
-export default withSwapiService()(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
