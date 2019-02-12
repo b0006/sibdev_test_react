@@ -7,7 +7,7 @@ const authentication = (state = initialState, action) => {
   switch (action.type) {
     case authConstants.LOGIN_REQUEST:
       return {
-        loggingIn: true,
+        loggedIn: true,
         user: action.user
       };
     case authConstants.LOGIN_SUCCESS:
@@ -18,7 +18,9 @@ const authentication = (state = initialState, action) => {
     case authConstants.LOGIN_FAILURE:
       return {};
     case authConstants.LOGOUT:
-      return {};
+      return {
+        loggedIn: false
+      };
     default:
       return state
   }

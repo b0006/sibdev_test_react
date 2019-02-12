@@ -1,11 +1,11 @@
 import { AuthService } from '../services';
 import { authConstants } from '../constants';
 
-function login(username, password) {
+function signIn(username, password) {
   return dispatch => {
     dispatch(request({ username }));
 
-    AuthService.login(username, password)
+    AuthService.signIn(username, password)
       .then(
         user => {
           dispatch(success(user));
@@ -27,6 +27,6 @@ function logout() {
 }
 
 export {
-  login,
+  signIn,
   logout
 };

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withAuthService } from '../hoc';
+import { authActions } from "../../actions";
 
 class Navbar extends Component {
   onLogout = () => {
-
+    const { logout } = this.props;
+    logout();
   };
 
   render() {
@@ -46,4 +50,17 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  const { loggedIn } = state.authentication;
+  return {
+    loggedIn
+  };
+};
+
+const mapDispatchToProps = {
+  logout: authActions.logout
+};
+
+export default withAuthService()(
+  connect(mapStateToProps, mapDispatchToProps)(Navbar)
+);

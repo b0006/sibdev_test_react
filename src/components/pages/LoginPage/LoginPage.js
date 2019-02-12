@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withAuthService } from '../../hoc';
+import { authActions } from "../../../actions";
 
 class LoginPage extends Component {
   state = {
@@ -9,10 +10,6 @@ class LoginPage extends Component {
     password: '',
     submitted: false
   };
-
-  componentDidMount() {
-
-  }
 
   onLogin = (event) => {
     this.setState({
@@ -32,11 +29,15 @@ class LoginPage extends Component {
     this.setState({ submitted: true });
 
     const { login, password } = this.state;
-    const { authStoreService } = this.props;
+    const { signIn } = this.props;
 
     if (login && password) {
-      authStoreService.login(login, password);
+      signIn(login, password);
     }
+  };
+
+  onChange = () => {
+    console.log(this.props);
   };
 
   render() {
@@ -80,12 +81,18 @@ class LoginPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { loggingIn } = state.authentication;
+const mapStateToProps = (state) => {
+  const { loggedIn } = state.authentication;
   return {
-    loggingIn
+    loggedIn
   };
-}
+};
 
-export default withAuthService()(connect(mapStateToProps)(LoginPage));
+const mapDispatchToProps = {
+  signIn: authActions.signIn
+};
+
+export default withAuthService()(
+  connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+);
 

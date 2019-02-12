@@ -1,4 +1,4 @@
-const login = async (login, password) => {
+const signIn = async (login, password) => {
   console.log('LOGIN');
   const hash = await hasCode(password);
   localStorage.setItem('user', JSON.stringify({
@@ -33,7 +33,7 @@ function hasCode(str) {
 }
 
 export {
-  login,
+  signIn,
   logout,
   test
 }
