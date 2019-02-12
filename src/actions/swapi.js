@@ -6,8 +6,6 @@ function getPersons() {
   return dispatch => {
     dispatch(request());
 
-    swapiStoreService.
-
     swapiStoreService.getPersons()
       .then(
         swPeople => {
