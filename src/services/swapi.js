@@ -1,15 +1,15 @@
-export default class SwapiService {
+const _apiBase = 'https://swapi.co/api/';
 
-  _apiBase = 'https://swapi.co/api/';
+const getResourse = async (url) => {
+  const res = await fetch(_apiBase + url);
+  return res.json();
+};
 
-  getResourse = async (url) => {
-    const res = await fetch(this._apiBase + url);
-    const body = await res.json();
-    return body;
-  };
+const getPersons = async () => {
+  const res = await getResourse('people');
+  return res.results;
+};
 
-  getPersons = async () => {
-    const peopleList = await this.getResourse('people/');
-    console.log(peopleList.results);
-  }
+export {
+  getPersons
 }

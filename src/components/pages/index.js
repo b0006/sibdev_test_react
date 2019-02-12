@@ -1,6 +1,6 @@
-import DashboardPage from './DashboardPage/DashboardPage';
-import LoginPage from './LoginPage/LoginPage';
-import StartPage from './StartPage/StartPage';
+import DashboardPage from './DashboardPage';
+import LoginPage from './LoginPage';
+import StartPage from './StartPage';
 
 export {
   DashboardPage,

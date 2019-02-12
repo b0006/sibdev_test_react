@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withAuthService } from '../../hoc';
-import { authActions } from "../../../actions";
+import { authActions } from "../../actions";
 
 class LoginPage extends Component {
   state = {
@@ -86,7 +85,6 @@ const mapDispatchToProps = {
   signIn: authActions.signIn
 };
 
-export default withAuthService()(
-  connect(mapStateToProps, mapDispatchToProps)(LoginPage)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+
 

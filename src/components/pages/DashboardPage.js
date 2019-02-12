@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import {Redirect} from "react-router-dom";
 import { connect } from 'react-redux';
-import { withAuthService } from '../../hoc';
+import { withAuthService } from '../hoc';
+import { SwapiServiceProvider } from "../../components/context";
+import { SwapiService } from "../../services";
+
+
+import Dashboard from '../Dashboard';
 
 class DashboardPage extends Component {
   render() {
@@ -11,7 +16,9 @@ class DashboardPage extends Component {
     }
 
     return (
-      <div>Dash</div>
+      <SwapiServiceProvider value={SwapiService}>
+        <Dashboard />
+      </SwapiServiceProvider>
     )
   }
 }

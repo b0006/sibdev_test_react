@@ -16,34 +16,32 @@ class Navbar extends Component {
     const loginLink = !loggedIn ?
       <li><Link to="/login">Login</Link></li> : null;
     const logoutLink = loggedIn ?
-      <li onClick={this.onLogout}><a>{user.login}, logout</a></li> : null;
+      <li onClick={this.onLogout}><a href="#">{user.login}, logout</a></li> : null;
 
     return (
-      <div>
-        <nav className="uk-navbar-container" uk-navbar="true">
-          <div className="uk-navbar-left">
-            <Link to="/" className="uk-navbar-item uk-logo">Home</Link>
-          </div>
+      <nav className="uk-navbar-container" data-uk-navbar="true">
+        <div className="uk-navbar-left">
+          <Link to="/" className="uk-navbar-item uk-logo">Home</Link>
+        </div>
 
-          <div className="uk-navbar-right">
-            <ul className="uk-navbar-nav">
-              { loginLink }
-              <li>
-                <Link to="/dash/">Dashboard</Link>
-                <div className="uk-navbar-dropdown">
-                  <ul className="uk-nav uk-navbar-dropdown-nav">
-                    <li><Link to="/sw/">Star wars</Link></li>
-                    <li><Link to="/cats/">Cats</Link></li>
-                    <li><Link to="/punks/">Punks</Link></li>
-                  </ul>
-                </div>
-              </li>
-              <li><Link to="/settings">Settings</Link></li>
-              { logoutLink }
-            </ul>
-          </div>
-        </nav>
-      </div>
+        <div className="uk-navbar-right">
+          <ul className="uk-navbar-nav">
+            { loginLink }
+            <li>
+              <Link to="/dash/">Dashboard</Link>
+              <div className="uk-navbar-dropdown">
+                <ul className="uk-nav uk-navbar-dropdown-nav">
+                  <li><Link to="/sw/">Star wars</Link></li>
+                  <li><Link to="/cats/">Cats</Link></li>
+                  <li><Link to="/punks/">Punks</Link></li>
+                </ul>
+              </div>
+            </li>
+            <li><Link to="/settings">Settings</Link></li>
+            { logoutLink }
+          </ul>
+        </div>
+      </nav>
     )
   }
 }
