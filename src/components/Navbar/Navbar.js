@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withAuthService } from '../hoc';
 import { authActions } from "../../actions";
 
+import MenuDropdown from '../MenuDropdown';
+
 class Navbar extends Component {
   onLogout = () => {
     const { logout } = this.props;
@@ -18,6 +20,22 @@ class Navbar extends Component {
     const logoutLink = loggedIn ?
       <li onClick={this.onLogout}><a href="#">{user.login}, logout</a></li> : null;
 
+    const services = [
+      {link: '/sw/', name: 'Star Wars'},
+      {link: '/cats/', name: 'Cats'},
+      {link: '/punks/', name: 'Punks'}
+    ];
+
+    const users = [
+      {link: '/', name: 'User 1'}
+    ];
+
+    const dashboardMenu = loggedIn ?
+      <MenuDropdown items={services} link="/dash/" title="Dashboard" /> : null;
+
+    const userMenu = loggedIn ?
+      <MenuDropdown items={users} link="/settings/" title="Users" /> : null;
+
     return (
       <nav className="uk-navbar-container" data-uk-navbar="true">
         <div className="uk-navbar-left">
@@ -27,17 +45,8 @@ class Navbar extends Component {
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav">
             { loginLink }
-            <li>
-              <Link to="/dash/">Dashboard</Link>
-              <div className="uk-navbar-dropdown">
-                <ul className="uk-nav uk-navbar-dropdown-nav">
-                  <li><Link to="/sw/">Star wars</Link></li>
-                  <li><Link to="/cats/">Cats</Link></li>
-                  <li><Link to="/punks/">Punks</Link></li>
-                </ul>
-              </div>
-            </li>
-            <li><Link to="/settings">Settings</Link></li>
+            { dashboardMenu }
+            { userMenu }
             { logoutLink }
           </ul>
         </div>

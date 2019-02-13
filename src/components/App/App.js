@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { StartPage, LoginPage, DashboardPage } from '../pages';
+import { StartPage, LoginPage, DashboardPage, SettingPage } from '../pages';
 import Navbar from '../Navbar';
-
-import { SwapiServiceProvider } from "../../components/context";
-import { SwapiService } from "../../services";
 
 class App extends Component {
   render() {
@@ -14,9 +11,8 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={StartPage} />
           <Route path="/login" component={LoginPage} />
-          <SwapiServiceProvider value={SwapiService}>
-            <Route path="/dash/" component={DashboardPage} />
-          </SwapiServiceProvider>
+          <Route path="/dash/" component={DashboardPage} />
+          <Route path="/settings" component={SettingPage} />
         </Switch>
       </div>
     );

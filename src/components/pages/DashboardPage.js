@@ -5,7 +5,6 @@ import { withAuthService } from '../hoc';
 import { SwapiServiceProvider } from "../../components/context";
 import { SwapiService } from "../../services";
 
-
 import Dashboard from '../Dashboard';
 
 class DashboardPage extends Component {
