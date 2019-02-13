@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { usersActions } from "../../actions";
 
 class UserAddForm extends Component {
   state = {
@@ -37,9 +39,9 @@ class UserAddForm extends Component {
     event.preventDefault();
     const { fullname, login, services } = this.state;
     if(fullname && login && services.length > 0){
-      console.log(this.state);
+      const { add } = this.props;
+      add(fullname, login, services);
     }
-
   };
 
   render() {
@@ -95,4 +97,15 @@ class UserAddForm extends Component {
   }
 }
 
-export default UserAddForm;
+const mapStateToProps = (state) => {
+  const { userList } = state.users;
+  return {
+    userList
+  };
+};
+
+const mapDispatchToProps = {
+  add: usersActions.add
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserAddForm);
