@@ -14,7 +14,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { loggedIn, user } = this.props;
+    const { loggedIn, user, userList } = this.props;
 
     const loginLink = !loggedIn ?
       <li><Link to="/login">Login</Link></li> : null;
@@ -27,13 +27,11 @@ class Navbar extends Component {
       {link: '/punks/', name: 'Punks'}
     ];
 
-    const users = [
-      {link: '/', name: 'User 1'}
-    ];
 
     const dashboardMenu = loggedIn ?
       <MenuDropdown items={services} link="/dash/" title="Dashboard" /> : null;
 
+    const users = setArUsers(userList);
     const userMenu = loggedIn ?
       <MenuDropdown items={users} link="/settings/" title="Users" /> : null;
 
@@ -56,11 +54,22 @@ class Navbar extends Component {
   }
 }
 
+const setArUsers = (users) => {
+  return users.map(item => {
+    return {
+      name: item.fullname,
+      link: '/dash/' + item.login
+    }
+  });
+};
+
 const mapStateToProps = (state) => {
   const { loggedIn, user } = state.authentication;
+  const { userList } = state.users;
   return {
     loggedIn,
-    user
+    user,
+    userList
   };
 };
 

@@ -78,17 +78,17 @@ class UserAddForm extends Component {
             <div className="uk-form-controls">
               <label><input className="uk-checkbox"
                             type="checkbox"
-                            value="sw"
+                            value="Star Wars"
                             onChange={this.onServiceChange}
               /> Star Wars</label>
               <label><input className="uk-checkbox"
                             type="checkbox"
-                            value="cats"
+                            value="Cats"
                             onChange={this.onServiceChange}
               /> Cats</label>
               <label><input className="uk-checkbox"
                             type="checkbox"
-                            value="punks"
+                            value="Punks"
                             onChange={this.onServiceChange}
               /> Punks</label>
             </div>

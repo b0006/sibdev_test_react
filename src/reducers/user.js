@@ -63,6 +63,19 @@ const users = (state = initialState, action) => {
   }
 };
 
+function addUser(userList, newUser) {
+  return [
+
+  ]
+
+  /**
+   * ...state.arr.slice(0, action.pos),
+   action.newItem,
+   ...state.arr.slice(action.pos),
+   *
+   */
+}
+
 function removeUser(userList, removeLogin) {
   return userList.filter(item => item.login !== removeLogin);
 }
