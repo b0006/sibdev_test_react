@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withAuthService } from '../hoc';
-import { authActions } from "../../actions";
+import { authActions, usersActions } from "../../actions";
 
 import MenuDropdown from '../MenuDropdown';
 
 class Navbar extends Component {
   onLogout = () => {
-    const { logout } = this.props;
+    const { logout, removeAll } = this.props;
     logout();
+    removeAll();
   };
 
   render() {
@@ -64,7 +65,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  logout: authActions.logout
+  logout: authActions.logout,
+  removeAll: usersActions.removeAll
 };
 
 export default withAuthService()(

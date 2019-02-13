@@ -45,6 +45,9 @@ class UserAddForm extends Component {
   };
 
   render() {
+    const { hasError, errorMsg } = this.props;
+    const error = hasError ? <span>{errorMsg}</span> : null;
+
     return (
       <form
         className="uk-form-horizontal uk-margin-large"
@@ -53,6 +56,8 @@ class UserAddForm extends Component {
         <fieldset className="uk-fieldset">
 
           <legend className="uk-legend">New user</legend>
+
+          {error}
 
           <div className="uk-margin uk-width-1-2@m">
             <label className="uk-form-label">Fullname</label>
@@ -91,16 +96,18 @@ class UserAddForm extends Component {
 
         </fieldset>
 
-        <input type="submit" value="Add" />
+        <input className="uk-button uk-button-default" type="submit" value="Add" />
       </form>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  const { userList } = state.users;
+  const { userList, hasError, errorMsg } = state.users;
   return {
-    userList
+    userList,
+    hasError,
+    errorMsg
   };
 };
 
