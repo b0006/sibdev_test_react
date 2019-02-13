@@ -15,6 +15,7 @@ class UserList extends Component {
 
   render() {
     const { userList } = this.props;
+    console.log(userList);
     const showTitle = userList.length > 0
       ? <h2>User list</h2> : null;
 

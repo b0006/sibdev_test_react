@@ -22,17 +22,19 @@ class UserAddForm extends Component {
   };
 
   onServiceChange = (event) => {
-    const services = this.state.services;
-    let index = null;
+    const { services } = this.state;
+    let index = 0;
+
+    let newServices = [];
 
     if (event.target.checked) {
-      services.push(event.target.value);
+      newServices = newServices.concat(services, event.target.value);
     } else {
       index = services.indexOf(event.target.value);
-      services.splice(index, 1);
+      newServices = [...services.slice(0, index), ...services.slice(index + 1)];
     }
 
-    this.setState({ services: services })
+    this.setState({ services: newServices });
   };
 
   onSubmit = (event) => {
@@ -75,21 +77,18 @@ class UserAddForm extends Component {
 
           <div className="uk-margin uk-width-1-2@m">
             <label className="uk-form-label">Services</label>
-            <div className="uk-form-controls">
+            <div className="uk-form-controls" onChange={this.onServiceChange}>
               <label><input className="uk-checkbox"
                             type="checkbox"
-                            value="Star Wars"
-                            onChange={this.onServiceChange}
+                            value="sw"
               /> Star Wars</label>
               <label><input className="uk-checkbox"
                             type="checkbox"
-                            value="Cats"
-                            onChange={this.onServiceChange}
+                            value="cats"
               /> Cats</label>
               <label><input className="uk-checkbox"
                             type="checkbox"
-                            value="Punks"
-                            onChange={this.onServiceChange}
+                            value="punks"
               /> Punks</label>
             </div>
           </div>

@@ -7,11 +7,7 @@ function add(fullname, login, services) {
 
     const newUser = UserService.add(fullname, login, services);
     if(newUser.success) {
-      dispatch(success({
-        fullname: fullname,
-        login: login,
-        services: services
-      }));
+      dispatch(success(newUser));
     } else {
       dispatch(failure(newUser.message));
     }

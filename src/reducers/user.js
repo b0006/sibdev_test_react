@@ -1,22 +1,17 @@
 import { userConstants } from '../constants';
 import { findLocalItems } from '../utils/localStorage';
 
-const initialOtherState = {
-  hasError: false,
-  errorMsg: null,
-  activeUser: null
-};
-
 let userList = findLocalItems(/(user_)[\d\w]+/gm);
 const initialState = userList
-  ? { userList, initialOtherState }
-  : { userList: [], initialOtherState };
+  ? { userList, hasError: false, errorMsg: null, activeUser: null }
+  : { userList: [], hasError: false, errorMsg: null, activeUser: null  };
 
 const users = (state = initialState, action) => {
   switch (action.type) {
     case userConstants.USER_ADD_REQUEST:
       return state;
     case userConstants.USER_ADD_SUCCESS:
+      console.log(state)
       return {
         ...state,
         userList: [
