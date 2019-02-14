@@ -52,10 +52,56 @@ const users = (state = initialState, action) => {
         hasError: true,
         errorMsg: action.error
       };
+
+    case userConstants.USER_SET_ACTIVE_FOR_UPDATE_REQUEST:
+      return state;
+    case userConstants.USER_SET_ACTIVE_FOR_UPDATE_SUCCESS:
+      return {
+        ...state,
+        activeUser: action.user
+      };
+    case userConstants.USER_SET_ACTIVE_FOR_UPDATE_FAILURE:
+      return {
+        ...state,
+        hasError: true,
+        errorMsg: action.error
+      };
+
+    case userConstants.USER_DELETE_ACTIVE_FOR_UPDATE_REQUEST:
+      return state;
+    case userConstants.USER_DELETE_ACTIVE_FOR_UPDATE_SUCCESS:
+      return {
+        ...state,
+        activeUser: null
+      };
+    case userConstants.USER_DELETE_ACTIVE_FOR_UPDATE_FAILURE:
+      return {
+        ...state,
+        hasError: true,
+        errorMsg: action.error
+      };
+
+    case userConstants.USER_UPDATE_REQUEST:
+      return state;
+    case userConstants.USER_UPDATE_SUCCESS:
+      return {
+        ...state,
+        userList: updateUser(state.userList, action.user)
+      };
+    case userConstants.USER_UPDATE_FAILURE:
+      return {
+        ...state,
+        hasError: true,
+        errorMsg: action.error
+      };
     default:
       return state
   }
 };
+
+function updateUser(userList, user) {
+
+}
 
 function removeUser(userList, removeLogin) {
   return userList.filter(item => item.login !== removeLogin);

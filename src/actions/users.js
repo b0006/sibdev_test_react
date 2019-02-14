@@ -52,8 +52,43 @@ function removeAll() {
   function failure(error) { return { type: userConstants.USER_REMOVE_ALL_FAILURE, error } }
 }
 
+function update(fullname, login, services) {
+
+}
+
+function setUserForUpdate(login) {
+  return dispatch => {
+    dispatch(request(login));
+
+    const result = UserService.getUser(login);
+    if(result.success) {
+      dispatch(success(result.user));
+    } else {
+      dispatch(failure(result.message));
+    }
+  };
+
+  function request(login) { return { type: userConstants.USER_SET_ACTIVE_FOR_UPDATE_REQUEST, login } }
+  function success(user) { return { type: userConstants.USER_SET_ACTIVE_FOR_UPDATE_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.USER_SET_ACTIVE_FOR_UPDATE_FAILURE, error } }
+}
+
+function delUserForUpdate() {
+  return dispatch => {
+    dispatch(request());
+
+    dispatch(success());
+  };
+
+  function request() { return { type: userConstants.USER_DELETE_ACTIVE_FOR_UPDATE_REQUEST } }
+  function success() { return { type: userConstants.USER_DELETE_ACTIVE_FOR_UPDATE_SUCCESS } }
+}
+
 export {
   add,
   remove,
-  removeAll
+  removeAll,
+  setUserForUpdate,
+  update,
+  delUserForUpdate
 };

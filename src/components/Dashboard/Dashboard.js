@@ -4,23 +4,23 @@ import { connect } from 'react-redux';
 import DashboardItem from '../DashboardItem';
 
 class Dashboard extends Component {
-
-  componentDidMount() {
-    const { serviceList, activeUser } = this.props;
-  }
-
   render() {
+    const { serviceList, activeUser } = this.props;
     return (
-      <div id="search-results-grid" className="uk-child-width-1-3@m" data-uk-grid>
-        <DashboardItem
-          title="Star Wars"
-          imgUrl="/img/sw.png"
-          desc="Description"/>
-        <DashboardItem
-          title="Cats"
-          imgUrl="/img/cats.jpg"
-          desc="Description"/>
-        <DashboardItem />
+      <div className="uk-margin">
+        <h2>{activeUser.fullname}</h2>
+        <div id="search-results-grid" className="uk-child-width-1-3@m" data-uk-grid>
+          {
+            serviceList.map(item => (
+              <DashboardItem
+                key={'dash_' + item.value}
+                title={item.name}
+                imgUrl={item.imgUrl}
+                desc={item.description}
+              />
+            ))
+          }
+        </div>
       </div>
     )
   }

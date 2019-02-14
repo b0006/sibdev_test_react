@@ -21,6 +21,26 @@ export default class UserService {
     }
   };
 
+  static getUser = (login) => {
+    const user = JSON.parse(window.localStorage.getItem('user_' + login));
+
+    if(!user) {
+      return {
+        success: false,
+        message: 'Login wasn\'t found'
+      }
+    }
+
+    return {
+      success: true,
+      user: user
+    }
+  };
+
+  static update = (fullname, login, services) => {
+
+  };
+
   static remove = (login) => {
     try {
       localStorage.removeItem('user_' + login);

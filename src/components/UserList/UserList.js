@@ -5,12 +5,14 @@ import {usersActions} from "../../actions";
 class UserList extends Component {
 
   onUpdate = (login) => {
-
+    const { setUserForUpdate } = this.props;
+    setUserForUpdate(login);
   };
 
   onDelete = (login) => {
-    const { remove } = this.props;
+    const { remove, delUserForUpdate } = this.props;
     remove(login);
+    delUserForUpdate();
   };
 
   render() {
@@ -59,7 +61,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  remove: usersActions.remove
+  remove: usersActions.remove,
+  setUserForUpdate: usersActions.setUserForUpdate,
+  delUserForUpdate: usersActions.delUserForUpdate
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);

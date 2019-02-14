@@ -6,16 +6,15 @@ class DashboardItem extends Component {
 
     return (
       <div>
-
-          <div className="uk-card uk-card-default">
-            <div className="uk-card-media-top">
-              <img src={imgUrl} alt="" />
-            </div>
-            <div className="uk-card-body">
-              <h3 className="uk-card-title">{title}</h3>
-              <p>{desc}</p>
-            </div>
+        <div className="uk-card uk-card-default">
+          <div className="uk-card-media-top">
+            <img src={imgUrl} alt="" />
           </div>
+          <div className="uk-card-body">
+            <h3 className="uk-card-title">{title}</h3>
+            <p>{desc}</p>
+          </div>
+        </div>
       </div>
     )
   }

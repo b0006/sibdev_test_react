@@ -23,10 +23,11 @@ class SettingPage extends Component {
 
 const mapStateToProps = (state) => {
   const { loggedIn } = state.authentication;
-  const { userList } = state.users;
+  const { userList, activeUser } = state.users;
   return {
     loggedIn,
-    userList
+    userList,
+    activeUser
   };
 };
 
