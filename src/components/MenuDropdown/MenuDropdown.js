@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class MenuDropdown extends Component {
   render() {
     const { items, title, link } = this.props;
-
     const body = items.length > 0 ?
       <div className="uk-navbar-dropdown">
         <ul className="uk-nav uk-navbar-dropdown-nav">

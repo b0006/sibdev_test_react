@@ -7,8 +7,6 @@ class Dashboard extends Component {
 
   componentDidMount() {
     const { serviceList, activeUser } = this.props;
-    console.log(serviceList)
-    console.log(activeUser)
   }
 
   render() {

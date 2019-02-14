@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { usersActions } from "../../actions";
 
+import serviceStatic from '../../serviceStatic'
+
 class UserSettingForm extends Component {
   state = {
     fullname: '',
     login: '',
     services: [],
-    serviceList: {}
+    serviceList: []
   };
 
   onFullnameChange = (event) => {
@@ -109,28 +111,9 @@ class UserSettingForm extends Component {
 const setServiceList = (arServices) => {
   const newServiceList = [];
 
-  arServices.map(service => {
-    if(service === 'sw') {
-      newServiceList.push({
-        title: 'sw',
-        name: 'Star wars',
-        link: 'sw/',
-        description: 'THIS IS STAR WARS!!!'
-      });
-    } else if(service === 'cats') {
-      newServiceList.push({
-        title: 'cats',
-        name: 'Cats',
-        link: 'cats/',
-        description: 'Cats API'
-      });
-    } else if(service === 'punks') {
-      newServiceList.push({
-        title: 'punks',
-        name: 'Punks',
-        link: 'punks/',
-        description: 'Punks API'
-      });
+  serviceStatic.map(item => {
+    if(arServices.indexOf(item.value) !== -1) {
+      newServiceList.push(item);
     }
   });
 

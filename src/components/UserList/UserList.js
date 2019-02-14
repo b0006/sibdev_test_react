@@ -4,7 +4,7 @@ import {usersActions} from "../../actions";
 
 class UserList extends Component {
 
-  onShow = (login) => {
+  onUpdate = (login) => {
 
   };
 
@@ -34,11 +34,11 @@ class UserList extends Component {
                   <ul>
                     {
                       item.services.map(service => (
-                        <li key={'service_' + service.title + '_' + item.login } >{service.name}</li>
+                        <li key={'service_' + service.value + '_' + item.login } >{service.name}</li>
                       ))
                     }
                   </ul>
-                  <input className="uk-button uk-button-primary" type="button" onClick={() => {this.onShow(item.login)}} value="Show" />
+                  <input className="uk-button uk-button-primary" type="button" onClick={() => {this.onUpdate(item.login)}} value="Update" />
                   <input className="uk-button uk-button-default" type="button" onClick={() => {this.onDelete(item.login)}} value="Delete" />
                 </div>
               </li>

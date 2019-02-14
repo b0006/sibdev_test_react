@@ -6,8 +6,8 @@ import { dashboardActions } from "../../actions";
 class UserListMenu extends Component {
 
   setDashboard = (login) => {
-    const { getServiceList } = this.props;
-    getServiceList(login);
+    const { getServiceData } = this.props;
+    getServiceData(login);
   };
 
   render() {
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  getServiceList: dashboardActions.getServiceList
+  getServiceData: dashboardActions.getServiceData
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserListMenu);

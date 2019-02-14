@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withAuthService } from '../hoc';
-import { authActions, usersActions } from "../../actions";
+import { authActions, dashboardActions, usersActions } from "../../actions";
 
-import MenuDropdown from '../MenuDropdown';
 import UserListMenu from '../UserListMenu';
 
 class Navbar extends Component {
+  onSetDash = () => {
+    const { getServiceData } = this.props;
+    getServiceData();
+  };
+
   onLogout = () => {
     const { logout, removeAll } = this.props;
     logout();
@@ -15,21 +18,15 @@ class Navbar extends Component {
   };
 
   render() {
-    const { loggedIn, user, userList } = this.props;
+    const { loggedIn } = this.props;
 
     const loginLink = !loggedIn ?
       <li><Link to="/login">Login</Link></li> : null;
     const logoutLink = loggedIn ?
-      <li onClick={this.onLogout}><a href="#">{user.login}, logout</a></li> : null;
-
-    const services = [
-      {link: '/sw/', name: 'Star Wars'},
-      {link: '/cats/', name: 'Cats'},
-      {link: '/punks/', name: 'Punks'}
-    ];
+      <li onClick={this.onLogout}><a href="#">Logout</a></li> : null;
 
     const dashboardMenu = loggedIn ?
-      <MenuDropdown items={services} link="/dash/" title="Dashboard" /> : null;
+      <li><Link to='/dash' onClick={this.onSetDash}>Dashboard</Link></li> : null;
 
     const userMenu = loggedIn ? <UserListMenu /> : null;
 
@@ -64,9 +61,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   logout: authActions.logout,
-  removeAll: usersActions.removeAll
+  removeAll: usersActions.removeAll,
+  getServiceData: dashboardActions.getServiceData
 };
 
-export default withAuthService()(
-  connect(mapStateToProps, mapDispatchToProps)(Navbar)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+

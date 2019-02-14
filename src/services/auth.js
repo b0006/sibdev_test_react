@@ -1,15 +1,26 @@
+import serviceStatic from '../serviceStatic';
+
+function getArServices() {
+  let arServices = [];
+  serviceStatic.map(item => {
+    arServices.push(item);
+  });
+  return arServices;
+}
+
 export default class AuthService {
   static signIn = async (login, password) => {
     const hash = await hasCode(password);
-    localStorage.setItem('user', JSON.stringify({
-      login: login,
-      password: hash
-    }));
 
-    return {
+    const user = {
       login: login,
-      password: hash
-    }
+      password: hash,
+      services: getArServices()
+    };
+
+    localStorage.setItem('user', JSON.stringify(user));
+
+    return user;
   };
 
   static logout = () => {
