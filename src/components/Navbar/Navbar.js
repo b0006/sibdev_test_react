@@ -5,6 +5,7 @@ import { withAuthService } from '../hoc';
 import { authActions, usersActions } from "../../actions";
 
 import MenuDropdown from '../MenuDropdown';
+import UserListMenu from '../UserListMenu';
 
 class Navbar extends Component {
   onLogout = () => {
@@ -27,13 +28,10 @@ class Navbar extends Component {
       {link: '/punks/', name: 'Punks'}
     ];
 
-
     const dashboardMenu = loggedIn ?
       <MenuDropdown items={services} link="/dash/" title="Dashboard" /> : null;
 
-    const users = setArUsers(userList);
-    const userMenu = loggedIn ?
-      <MenuDropdown items={users} link="/settings/" title="Users" /> : null;
+    const userMenu = loggedIn ? <UserListMenu /> : null;
 
     return (
       <nav className="uk-navbar-container" data-uk-navbar="true">
@@ -53,15 +51,6 @@ class Navbar extends Component {
     )
   }
 }
-
-const setArUsers = (users) => {
-  return users.map(item => {
-    return {
-      name: item.fullname,
-      link: '/dash/' + item.login
-    }
-  });
-};
 
 const mapStateToProps = (state) => {
   const { loggedIn, user } = state.authentication;

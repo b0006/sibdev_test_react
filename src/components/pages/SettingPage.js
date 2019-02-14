@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
-import UserAddForm from '../UserAddForm';
+import UserSettingForm from '../UserSettingForm';
 import UserList from '../UserList';
 
 class SettingPage extends Component {
@@ -14,7 +14,7 @@ class SettingPage extends Component {
     return (
       <div>
         <h2>Setting page</h2>
-        <UserAddForm />
+        <UserSettingForm />
         <UserList />
       </div>
     )

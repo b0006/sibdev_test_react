@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { usersActions } from "../../actions";
 
-class UserAddForm extends Component {
+class UserSettingForm extends Component {
   state = {
     fullname: '',
     login: '',
-    services: []
+    services: [],
+    serviceList: {}
   };
 
   onFullnameChange = (event) => {
@@ -26,7 +27,6 @@ class UserAddForm extends Component {
     let index = 0;
 
     let newServices = [];
-
     if (event.target.checked) {
       newServices = newServices.concat(services, event.target.value);
     } else {
@@ -34,15 +34,20 @@ class UserAddForm extends Component {
       newServices = [...services.slice(0, index), ...services.slice(index + 1)];
     }
 
-    this.setState({ services: newServices });
+    const newServiceList = setServiceList(newServices);
+
+    this.setState({
+      services: newServices,
+      serviceList: newServiceList
+    });
   };
 
   onSubmit = (event) => {
     event.preventDefault();
-    const { fullname, login, services } = this.state;
+    const { fullname, login, services, serviceList } = this.state;
     if(fullname && login && services.length > 0){
       const { add } = this.props;
-      add(fullname, login, services);
+      add(fullname, login, serviceList);
     }
   };
 
@@ -101,6 +106,37 @@ class UserAddForm extends Component {
   }
 }
 
+const setServiceList = (arServices) => {
+  const newServiceList = [];
+
+  arServices.map(service => {
+    if(service === 'sw') {
+      newServiceList.push({
+        title: 'sw',
+        name: 'Star wars',
+        link: 'sw/',
+        description: 'THIS IS STAR WARS!!!'
+      });
+    } else if(service === 'cats') {
+      newServiceList.push({
+        title: 'cats',
+        name: 'Cats',
+        link: 'cats/',
+        description: 'Cats API'
+      });
+    } else if(service === 'punks') {
+      newServiceList.push({
+        title: 'punks',
+        name: 'Punks',
+        link: 'punks/',
+        description: 'Punks API'
+      });
+    }
+  });
+
+  return newServiceList;
+};
+
 const mapStateToProps = (state) => {
   const { userList, hasError, errorMsg } = state.users;
   return {
@@ -114,4 +150,4 @@ const mapDispatchToProps = {
   add: usersActions.add
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserAddForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UserSettingForm);

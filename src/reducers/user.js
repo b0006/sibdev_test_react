@@ -4,14 +4,13 @@ import { findLocalItems } from '../utils/localStorage';
 let userList = findLocalItems(/(user_)[\d\w]+/gm);
 const initialState = userList
   ? { userList, hasError: false, errorMsg: null, activeUser: null }
-  : { userList: [], hasError: false, errorMsg: null, activeUser: null  };
+  : { userList: [], hasError: false, errorMsg: null, activeUser: null };
 
 const users = (state = initialState, action) => {
   switch (action.type) {
     case userConstants.USER_ADD_REQUEST:
       return state;
     case userConstants.USER_ADD_SUCCESS:
-      console.log(state)
       return {
         ...state,
         userList: [
@@ -57,19 +56,6 @@ const users = (state = initialState, action) => {
       return state
   }
 };
-
-function addUser(userList, newUser) {
-  return [
-
-  ]
-
-  /**
-   * ...state.arr.slice(0, action.pos),
-   action.newItem,
-   ...state.arr.slice(action.pos),
-   *
-   */
-}
 
 function removeUser(userList, removeLogin) {
   return userList.filter(item => item.login !== removeLogin);

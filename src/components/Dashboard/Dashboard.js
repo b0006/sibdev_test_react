@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { swapiActions } from "../../actions";
 
 import DashboardItem from '../DashboardItem';
 
 class Dashboard extends Component {
 
   componentDidMount() {
-    const { getPersons } = this.props;
-    getPersons();
+    const { serviceList, activeUser } = this.props;
+    console.log(serviceList)
+    console.log(activeUser)
   }
 
   render() {
@@ -29,15 +29,12 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { swPeople } = state.swapi;
+  const { serviceList, activeUser } = state.dashboard;
   return {
-    swPeople
+    serviceList,
+    activeUser
   };
 };
 
-const mapDispatchToProps = {
-  getPersons: swapiActions.getPersons
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);
 

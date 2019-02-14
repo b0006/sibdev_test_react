@@ -15,7 +15,6 @@ class UserList extends Component {
 
   render() {
     const { userList } = this.props;
-    console.log(userList);
     const showTitle = userList.length > 0
       ? <h2>User list</h2> : null;
 
@@ -35,7 +34,7 @@ class UserList extends Component {
                   <ul>
                     {
                       item.services.map(service => (
-                        <li key={'service_' + service + '_' + item.login } >{service}</li>
+                        <li key={'service_' + service.title + '_' + item.login } >{service.name}</li>
                       ))
                     }
                   </ul>
