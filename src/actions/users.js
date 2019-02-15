@@ -53,7 +53,20 @@ function removeAll() {
 }
 
 function update(fullname, login, services) {
+  return dispatch => {
+    dispatch(request({ fullname, login, services }));
 
+    const newUser = UserService.update(fullname, login, services);
+    if(newUser.success) {
+      dispatch(success(newUser));
+    } else {
+      dispatch(failure(newUser.message));
+    }
+  };
+
+  function request(user) { return { type: userConstants.USER_UPDATE_REQUEST, user } }
+  function success(user) { return { type: userConstants.USER_UPDATE_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.USER_UPDATE_FAILURE, error } }
 }
 
 function setUserForUpdate(login) {

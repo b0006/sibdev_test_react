@@ -38,7 +38,20 @@ export default class UserService {
   };
 
   static update = (fullname, login, services) => {
+    localStorage.removeItem('user_' + login);
 
+    localStorage.setItem('user_' + login, JSON.stringify({
+      fullname: fullname,
+      login: login,
+      services: services
+    }));
+
+    return {
+      success: true,
+      fullname: fullname,
+      login: login,
+      services: services
+    }
   };
 
   static remove = (login) => {

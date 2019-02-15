@@ -52,16 +52,36 @@ class UserUpdateForm extends Component {
     event.preventDefault();
     const { fullname, login, services, serviceList } = this.state;
     if(fullname && login && services.length > 0){
-      const { add } = this.props;
-      // add(fullname, login, serviceList);
+      const { update } = this.props;
+      update(fullname, login, serviceList);
     }
   };
 
   render() {
-    const {error, activeUser} = this.props;
+    const {error, activeUser } = this.props;
 
     const fullname = activeUser ? activeUser.fullname : null;
     const login = activeUser ? activeUser.login : null;
+
+    let userServices = getUserServiceList(activeUser.services);
+
+    const servicesCheckbox =
+      <div className="uk-margin uk-width-1-2@m">
+        <label className="uk-form-label">Services</label>
+        <div className="uk-form-controls" onChange={this.onServiceChange}>
+          {
+            userServices.map(item => (
+              <label key={item.value}>
+                <input type="checkbox"
+                       className="uk-checkbox"
+                       value={item.value}
+                />
+                {item.name}
+              </label>
+            ))
+          }
+        </div>
+      </div>;
 
     return (
       <div>
@@ -75,43 +95,54 @@ class UserUpdateForm extends Component {
             <div className="uk-margin uk-width-1-2@m">
               <label className="uk-form-label">Fullname</label>
               <div className="uk-form-controls">
-                <input className="uk-input" type="text" onChange={this.onFullnameChange} value={fullname} />
+                <input className="uk-input" type="text" onChange={this.onFullnameChange} />
               </div>
             </div>
 
             <div className="uk-margin uk-width-1-2@m">
               <label className="uk-form-label">Login</label>
               <div className="uk-form-controls">
-                <input className="uk-input" type="text" onChange={this.onLoginChange} value={login} />
+                <input className="uk-input" type="text" onChange={this.onLoginChange} />
               </div>
             </div>
 
-            <div className="uk-margin uk-width-1-2@m">
-              <label className="uk-form-label">Services</label>
-              <div className="uk-form-controls" onChange={this.onServiceChange}>
-                {
-                  serviceStatic.map(item => (
-                    <label key={item.value}>
-                      <input type="checkbox"
-                             className="uk-checkbox"
-                             value={item.value}
-                      />
-                      {item.name}
-                    </label>
-                  ))
-                }
-              </div>
-            </div>
+            {servicesCheckbox}
 
           </fieldset>
 
-          <input className="uk-button uk-button-default" type="submit" value="Update" />
+          <input className="uk-button uk-button-default" type="submit" value="Edit" />
           <input className="uk-button uk-button-default" type="button" value="Close" onClick={this.onCloseForm}/>
         </form>
       </div>
     )
   }
 }
+
+const getUserServiceList = (userServices) => {
+  const newArray = [];
+
+  for(let i = 0; i < serviceStatic.length; i++) {
+    for(let j = 0; j < userServices.length; j++) {
+      if(serviceStatic[i].value === userServices[j].value) {
+        newArray[i] = {
+          checked: true,
+          value: serviceStatic[i].value,
+          name: serviceStatic[i].name
+        };
+      }
+    }
+
+    if(!newArray[i]) {
+      newArray[i] = {
+        checked: false,
+        value: serviceStatic[i].value,
+        name: serviceStatic[i].name
+      };
+    }
+  }
+
+  return newArray;
+};
 
 const setServiceList = (arServices) => {
   const newServiceList = [];

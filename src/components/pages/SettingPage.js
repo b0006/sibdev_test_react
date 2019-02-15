@@ -13,7 +13,7 @@ class SettingPage extends Component {
 
     return (
       <div>
-        <h2>Setting page</h2>
+        <h2>Users page</h2>
         <UserSettingForm />
         <UserList />
       </div>

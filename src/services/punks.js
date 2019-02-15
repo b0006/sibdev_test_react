@@ -1,6 +1,6 @@
-export default class SwapiService {
+export default class PunkService {
   constructor() {
-    this._apiBase = 'https://swapi.co/api/';
+    this._apiBase = 'https://api.punkapi.com/v2/';
   }
 
   getResource = async (url) => {
@@ -8,9 +8,9 @@ export default class SwapiService {
     return res.json();
   };
 
-  getPersons = async () => {
-    const res = await this.getResource('people');
-    return setArray(res.results);
+  getBeers = async () => {
+    const res = await this.getResource('beers?per_page=10');
+    return setArray(res);
   };
 }
 
@@ -18,11 +18,10 @@ function setArray(array) {
   let newArray = [];
   array.map(item => {
     newArray.push({
-      id: item.name,
-      text: item.name
+      id: item.id,
+      text: item.name + '. ' + item.tagline
     })
   });
 
   return newArray;
 }
-

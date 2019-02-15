@@ -17,6 +17,7 @@ class Dashboard extends Component {
                 title={item.name}
                 imgUrl={item.imgUrl}
                 desc={item.description}
+                link={item.link}
               />
             ))
           }
