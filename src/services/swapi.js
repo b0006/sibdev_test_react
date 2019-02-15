@@ -16,12 +16,12 @@ export default class SwapiService {
 
 function setArray(array) {
   let newArray = [];
-  array.map(item => {
+  array.map(item =>
     newArray.push({
       id: item.name,
       text: item.name
     })
-  });
+  );
 
   return newArray;
 }

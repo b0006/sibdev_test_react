@@ -1,16 +1,21 @@
 import { swapiConstants } from '../constants';
 
 const initialState = {
-  swPeople: []
+  swPeople: [],
+  swLoading: false
 };
 
 const swapi = (state = initialState, action) => {
   switch (action.type) {
     case swapiConstants.SW_PEOPLE_REQUEST:
-      return state;
+      return {
+        swPeople: state.swPeople,
+        swLoading: false
+      };
     case swapiConstants.SW_PEOPLE_SUCCESS:
       return {
-        swPeople: action.swPeople
+        swPeople: action.swPeople,
+        swLoading: true
       };
     case swapiConstants.SW_PEOPLE_FAILURE:
       return state;

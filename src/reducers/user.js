@@ -100,6 +100,12 @@ const users = (state = initialState, action) => {
 };
 
 function updateUser(userList, user) {
+  const userIndex = userList.findIndex(({login}) => user.login === login);
+  return [
+    ...userList.slice(0, userIndex),
+    user,
+    ...userList.slice(userIndex + 1)
+  ]
 
 }
 

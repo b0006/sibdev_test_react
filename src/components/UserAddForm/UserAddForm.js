@@ -8,7 +8,8 @@ class UserAddForm extends Component {
     fullname: '',
     login: '',
     services: [],
-    serviceList: []
+    serviceList: [],
+    submitted: false
   };
 
   onFullnameChange = (event) => {
@@ -45,6 +46,10 @@ class UserAddForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
+    this.setState({
+      submitted: true
+    });
+
     const { fullname, login, services, serviceList } = this.state;
     if(fullname && login && services.length > 0){
       const { add } = this.props;
@@ -54,6 +59,10 @@ class UserAddForm extends Component {
 
   render() {
     const { error } = this.props;
+    const { submitted, serviceList } = this.state;
+    const errorService = submitted && serviceList.length === 0
+      ? <span>Choose service</span>
+      : null;
 
     return (
       <div>
@@ -64,6 +73,7 @@ class UserAddForm extends Component {
           <fieldset className="uk-fieldset">
             <legend className="uk-legend">New user</legend>
             {error}
+            {errorService}
             <div className="uk-margin uk-width-1-2@m">
               <label className="uk-form-label">Fullname</label>
               <div className="uk-form-controls">
@@ -105,15 +115,9 @@ class UserAddForm extends Component {
 }
 
 const setServiceList = (arServices) => {
-  const newServiceList = [];
-
-  serviceStatic.map(item => {
-    if(arServices.indexOf(item.value) !== -1) {
-      newServiceList.push(item);
-    }
-  });
-
-  return newServiceList;
+  return serviceStatic.filter(item =>
+    arServices.indexOf(item.value) !== -1
+  );
 };
 
 const mapStateToProps = (state) => {

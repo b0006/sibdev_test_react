@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {Redirect} from "react-router-dom";
 import { connect } from 'react-redux';
-import { withAuthService } from '../hoc';
-import { SwapiServiceProvider } from "../../components/context";
-import { SwapiService } from "../../services";
 
 import Dashboard from '../Dashboard';
 
@@ -15,9 +12,7 @@ class DashboardPage extends Component {
     }
 
     return (
-      <SwapiServiceProvider value={SwapiService}>
-        <Dashboard />
-      </SwapiServiceProvider>
+      <Dashboard />
     )
   }
 }
@@ -29,6 +24,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withAuthService()(
-  connect(mapStateToProps)(DashboardPage)
-);
+export default connect(mapStateToProps)(DashboardPage)
+

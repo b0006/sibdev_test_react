@@ -16,12 +16,12 @@ export default class PunkService {
 
 function setArray(array) {
   let newArray = [];
-  array.map(item => {
+  array.map(item =>
     newArray.push({
       id: item.id,
       text: item.name + '. ' + item.tagline
     })
-  });
+  );
 
   return newArray;
 }

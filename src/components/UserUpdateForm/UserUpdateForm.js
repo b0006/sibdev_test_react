@@ -6,10 +6,34 @@ import serviceStatic from "../../serviceStatic";
 class UserUpdateForm extends Component {
   state = {
     fullname: '',
-    login: '',
     services: [],
-    serviceList: []
+    serviceList: [],
+    submitted: false
   };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { activeUser } = this.props;
+    const fullname = activeUser ? activeUser.fullname : null;
+    const login = activeUser ? activeUser.login : null;
+    if (prevProps.activeUser !== this.props.activeUser) {
+      this.setState({
+        fullname,
+        login,
+        submitted: false
+      });
+    }
+  }
+
+  componentDidMount(t) {
+    const { activeUser } = this.props;
+    const fullname = activeUser ? activeUser.fullname : null;
+    const login = activeUser ? activeUser.login : null;
+    this.setState({
+      fullname,
+      login,
+      submitted: false
+    });
+  }
 
   onCloseForm = () => {
     const { delUserForUpdate } = this.props;
@@ -19,12 +43,6 @@ class UserUpdateForm extends Component {
   onFullnameChange = (event) => {
     this.setState({
       fullname: event.target.value
-    })
-  };
-
-  onLoginChange = (event) => {
-    this.setState({
-      login: event.target.value
     })
   };
 
@@ -50,6 +68,10 @@ class UserUpdateForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
+    this.setState({
+      submitted: true
+    });
+
     const { fullname, login, services, serviceList } = this.state;
     if(fullname && login && services.length > 0){
       const { update } = this.props;
@@ -58,11 +80,8 @@ class UserUpdateForm extends Component {
   };
 
   render() {
-    const {error, activeUser } = this.props;
-
-    const fullname = activeUser ? activeUser.fullname : null;
-    const login = activeUser ? activeUser.login : null;
-
+    const { error, activeUser } = this.props;
+    const { submitted, serviceList } = this.state;
     let userServices = getUserServiceList(activeUser.services);
 
     const servicesCheckbox =
@@ -83,6 +102,10 @@ class UserUpdateForm extends Component {
         </div>
       </div>;
 
+    const errorService = submitted && serviceList.length === 0
+      ? <span>Choose service</span>
+      : null;
+
     return (
       <div>
         <form
@@ -92,17 +115,11 @@ class UserUpdateForm extends Component {
           <fieldset className="uk-fieldset">
             <legend className="uk-legend">Edit user</legend>
             {error}
+            {errorService}
             <div className="uk-margin uk-width-1-2@m">
               <label className="uk-form-label">Fullname</label>
               <div className="uk-form-controls">
-                <input className="uk-input" type="text" onChange={this.onFullnameChange} />
-              </div>
-            </div>
-
-            <div className="uk-margin uk-width-1-2@m">
-              <label className="uk-form-label">Login</label>
-              <div className="uk-form-controls">
-                <input className="uk-input" type="text" onChange={this.onLoginChange} />
+                <input className="uk-input" type="text" onChange={this.onFullnameChange} defaultValue={this.state.fullname}/>
               </div>
             </div>
 
@@ -110,7 +127,7 @@ class UserUpdateForm extends Component {
 
           </fieldset>
 
-          <input className="uk-button uk-button-default" type="submit" value="Edit" />
+          <input className="uk-button uk-button-default" type="submit" value="Edit" onClick={this.onSubmit}/>
           <input className="uk-button uk-button-default" type="button" value="Close" onClick={this.onCloseForm}/>
         </form>
       </div>
@@ -145,15 +162,9 @@ const getUserServiceList = (userServices) => {
 };
 
 const setServiceList = (arServices) => {
-  const newServiceList = [];
-
-  serviceStatic.map(item => {
-    if(arServices.indexOf(item.value) !== -1) {
-      newServiceList.push(item);
-    }
-  });
-
-  return newServiceList;
+  return serviceStatic.filter(item =>
+    arServices.indexOf(item.value) !== -1
+  );
 };
 
 const mapStateToProps = (state) => {

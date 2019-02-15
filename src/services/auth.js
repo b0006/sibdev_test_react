@@ -1,13 +1,5 @@
 import serviceStatic from '../serviceStatic';
 
-function getArServices() {
-  let arServices = [];
-  serviceStatic.map(item => {
-    arServices.push(item);
-  });
-  return arServices;
-}
-
 export default class AuthService {
   static signIn = async (login, password) => {
     const hash = await hasCode(password);
@@ -15,7 +7,7 @@ export default class AuthService {
     const user = {
       login: login,
       password: hash,
-      services: getArServices()
+      services: serviceStatic
     };
 
     localStorage.setItem('user', JSON.stringify(user));

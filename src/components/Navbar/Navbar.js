@@ -23,7 +23,7 @@ class Navbar extends Component {
     const loginLink = !loggedIn ?
       <li><Link to="/login">Login</Link></li> : null;
     const logoutLink = loggedIn ?
-      <li onClick={this.onLogout}><a href="#">Logout</a></li> : null;
+      <li onClick={this.onLogout}><Link to="/logout">Logout</Link></li> : null;
 
     const dashboardMenu = loggedIn ?
       <li><Link to='/dash' onClick={this.onSetDash}>Dashboard</Link></li> : null;

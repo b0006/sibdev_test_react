@@ -1,16 +1,21 @@
 import { catsConstants } from '../constants';
 
 const initialState = {
-  catFacts: []
+  catFacts: [],
+  catsLoading: false
 };
 
 const cats = (state = initialState, action) => {
   switch (action.type) {
     case catsConstants.CATS_GET_FACTS_REQUEST:
-      return state;
+      return {
+        catFacts: state.catFacts,
+        catsLoading: false
+      };
     case catsConstants.CATS_GET_FACTS_SUCCESS:
       return {
-        catFacts: action.catFacts
+        catFacts: action.catFacts,
+        catsLoading: true
       };
     case catsConstants.CATS_GET_FACTS_FAILURE:
       return state;

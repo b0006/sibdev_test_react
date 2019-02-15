@@ -16,12 +16,12 @@ export default class CatsService {
 
 function setArray(array) {
   let newArray = [];
-  array.map(item => {
+  array.map(item =>
     newArray.push({
       id: item._id,
       text: item.text
     })
-  });
+  );
 
   return newArray;
 }

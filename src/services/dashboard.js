@@ -1,4 +1,8 @@
 export default class DashboardService {
+  compareRandom = () => {
+    return Math.random() - 0.5;
+  };
+
   getServiceData = (login = 'user') => {
     let user = null;
     let fullname = null;
@@ -13,7 +17,7 @@ export default class DashboardService {
     if(user) {
       return {
         success: true,
-        serviceList: user.services,
+        serviceList: user.services.sort(this.compareRandom),
         user: {
           fullname: fullname,
           login: user.login

@@ -6,6 +6,7 @@ import DashboardItem from '../DashboardItem';
 class Dashboard extends Component {
   render() {
     const { serviceList, activeUser } = this.props;
+
     return (
       <div className="uk-margin">
         <h2>{activeUser.fullname}</h2>

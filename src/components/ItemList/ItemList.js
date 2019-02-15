@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
 import { swapiActions, catsActions, punksActions } from "../../actions";
+import Spinner from '../Spinner';
 
 class ItemList extends Component {
   componentDidMount() {
@@ -23,23 +24,42 @@ class ItemList extends Component {
   }
 
   render() {
-    const { type, swPeople, catFacts, beers } = this.props;
+    const {
+      type,
+      swPeople,
+      catFacts,
+      beers,
+      swLoading,
+      catsLoading,
+      punkLoading
+    } = this.props;
 
     let items = [];
     let title = null;
     switch (type) {
       case 'sw':
+        if(!swLoading) {
+          return <Spinner />;
+        }
         title = 'Star Wars people';
         items = swPeople;
         break;
       case 'cats':
+        if(!catsLoading) {
+          return <Spinner />;
+        }
         title = 'Random facts about cats';
         items = catFacts;
         break;
       case 'punks':
+        if(!punkLoading) {
+          return <Spinner />;
+        }
         title = 'Beers';
         items = beers;
         break;
+      default:
+        return <div>Oops</div>;
     }
 
     return (
@@ -58,13 +78,16 @@ class ItemList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { swPeople } = state.swapi;
-  const { catFacts } = state.cats;
-  const { beers } = state.punks;
+  const { swPeople, swLoading } = state.swapi;
+  const { catFacts, catsLoading } = state.cats;
+  const { beers, punkLoading } = state.punks;
   return {
     swPeople,
     catFacts,
-    beers
+    beers,
+    swLoading,
+    catsLoading,
+    punkLoading
   };
 };
 
