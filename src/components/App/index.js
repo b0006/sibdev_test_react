@@ -16,7 +16,7 @@ class App extends Component {
           <Route path="/login" component={LoginPage} />
           <Route path="/logout" component={StartPage} />
 
-          <Route path="/dash" component={DashboardPage} />
+          <Route path="/dash/:login" component={DashboardPage} />
           <Route path="/settings" component={SettingPage} />
 
           <Route path="/sw" exact render={() => (

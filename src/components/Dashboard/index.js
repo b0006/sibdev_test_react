@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import DashboardItem from './DashboardItem';
 import { dashboardActions } from "../../actions";
@@ -7,8 +8,10 @@ import { dashboardActions } from "../../actions";
 class Index extends Component {
 
   componentDidMount() {
-    const { getServiceData } = this.props;
-    getServiceData();
+    const { getServiceData, match } = this.props;
+
+    const currentLogin = match.params.login;
+    getServiceData(currentLogin);
   }
 
   render() {
@@ -47,5 +50,5 @@ const mapDispatchToProps = {
   getServiceData: dashboardActions.getServiceData
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Index));
 

@@ -21,9 +21,6 @@ class Navbar extends Component {
     const logoutLink = loggedIn ?
       <li onClick={this.onLogout}><Link to="/logout">{user.login}, logout</Link></li> : null;
 
-    const dashboardMenu = loggedIn ?
-      <li><Link to='/dash'>Dashboard</Link></li> : null;
-
     const userMenu = loggedIn ? <UserListMenu /> : null;
 
     return (
@@ -35,7 +32,6 @@ class Navbar extends Component {
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav">
             { loginLink }
-            { dashboardMenu }
             { userMenu }
             { logoutLink }
           </ul>

@@ -22,7 +22,7 @@ class UserListMenu extends Component {
                 key={user.login}
                 onClick={() => this.setDashboard(user.login)}
               >
-                <Link to="/dash">{user.fullname}</Link>
+                <Link to={"/dash/" + user.login}>{user.fullname}</Link>
               </li>
             ))
           }
