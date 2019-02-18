@@ -7,7 +7,6 @@ import UserUpdateForm from '../UserUpdateForm';
 
 class UserSettingForm extends Component {
   render() {
-    console.log(this.props)
     const { activeUser } = this.props;
     const editUserForm = activeUser
       ? <UserUpdateForm key="updateForm" />
