@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { dashboardActions } from "../../actions";
 
 class UserListMenu extends Component {
@@ -22,7 +24,7 @@ class UserListMenu extends Component {
                 key={user.login}
                 onClick={() => this.setDashboard(user.login)}
               >
-                <Link to={"/dash/" + user.login}>{user.fullname}</Link>
+                <Link to={"/dash/" + user.login + '/'}>{user.fullname}</Link>
               </li>
             ))
           }
@@ -38,6 +40,21 @@ class UserListMenu extends Component {
     )
   }
 }
+
+UserListMenu.propTypes = {
+  getServiceData: PropTypes.func,
+  userList: PropTypes.arrayOf(PropTypes.shape({
+    fullname: PropTypes.string.isRequired,
+    login: PropTypes.string.isRequired,
+    services: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.string,
+      link: PropTypes.string,
+      description: PropTypes.string,
+      imgUrl: PropTypes.string
+    }))
+  })).isRequired
+};
 
 const mapStateToProps = (state) => {
   const { userList } = state.users;

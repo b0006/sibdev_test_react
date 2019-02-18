@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { StartPage, LoginPage, DashboardPage, SettingPage } from '../pages';
+import serviceStatic from '../../serviceStatic';
 
 import Navbar from '../Navbar';
 import ItemList from "../ItemList";
@@ -16,18 +17,14 @@ class App extends Component {
           <Route path="/login" component={LoginPage} />
           <Route path="/logout" component={StartPage} />
 
-          <Route path="/dash/:login" component={DashboardPage} />
+          <Route path="/dash/:login/" component={DashboardPage} />
           <Route path="/settings" component={SettingPage} />
 
-          <Route path="/sw" exact render={() => (
-            <ItemList type="sw" />
-          )} />
-          <Route path="/cats" exact render={() => (
-            <ItemList type="cats" />
-          )} />
-          <Route path="/punks" exact render={() => (
-            <ItemList type="punks" />
-          )} />
+          {
+            serviceStatic.map(service => (
+              <Route key={`link_${service.value}`} path={"/" + service.value} exact render={() => (<ItemList type={service.value} />)} />
+            ))
+          }
         </Switch>
       </div>
     );

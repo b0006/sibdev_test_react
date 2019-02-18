@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Redirect} from "react-router-dom";
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Dashboard from '../Dashboard';
 
@@ -22,6 +23,10 @@ const mapStateToProps = (state) => {
   return {
     loggedIn
   };
+};
+
+DashboardPage.propTypes = {
+  loggedIn: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps)(DashboardPage)

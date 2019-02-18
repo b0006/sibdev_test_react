@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { authActions } from "../../actions";
 
 class LoginPage extends Component {
@@ -43,35 +44,32 @@ class LoginPage extends Component {
         <h2>Login page</h2>
         <div className="uk-margin">
           <div className="uk-inline">
-            <span className="uk-form-icon" data-uk-icon="icon: user"></span>
-            <input className="uk-input"
-                   type="text"
-                   placeholder="Login"
-                   onChange={this.onLogin}
-            />
+            <span className="uk-form-icon" data-uk-icon="icon: user" />
+            <input className="uk-input" type="text" placeholder="Login" onChange={this.onLogin} />
           </div>
         </div>
 
         <div className="uk-margin">
           <div className="uk-inline">
-            <span className="uk-form-icon" data-uk-icon="icon: lock"></span>
-            <input className="uk-input"
-                   type="password"
-                   placeholder="Password"
-                   onChange={this.onPassword}
-            />
+            <span className="uk-form-icon" data-uk-icon="icon: lock" />
+            <input className="uk-input" type="password" placeholder="Password" onChange={this.onPassword} />
           </div>
         </div>
 
         <div className="uk-margin">
           <div className="uk-inline">
-            <input className="uk-input" type="submit"/>
+            <input className="uk-input" type="submit" />
           </div>
         </div>
       </form>
     )
   }
 }
+
+LoginPage.propTypes = {
+  signIn: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = (state) => {
   const { loggedIn, user } = state.authentication;

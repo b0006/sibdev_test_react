@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { swapiActions, catsActions, punksActions } from "../../actions";
 import Spinner from '../Spinner';
 
@@ -76,6 +77,29 @@ class ItemList extends Component {
     )
   }
 }
+
+ItemList.propTypes = {
+  type: PropTypes.string.isRequired,
+  swPeople: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    text: PropTypes.string
+  })).isRequired,
+  catFacts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    text: PropTypes.string
+  })).isRequired,
+  beers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    text: PropTypes.string
+  })).isRequired,
+  swLoading: PropTypes.bool.isRequired,
+  catsLoading: PropTypes.bool.isRequired,
+  punkLoading: PropTypes.bool.isRequired,
+
+  getPersons: PropTypes.func.isRequired,
+  getFacts: PropTypes.func.isRequired,
+  getBeers: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => {
   const { swPeople, swLoading } = state.swapi;

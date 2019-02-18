@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { usersActions } from "../../actions";
 import serviceStatic from "../../serviceStatic";
 
@@ -159,6 +160,22 @@ const getUserServiceList = (userServices) => {
   }
 
   return newArray;
+};
+
+UserUpdateForm.propTypes = {
+  error: PropTypes.bool,
+  activeUser: PropTypes.shape({
+    fullname: PropTypes.string,
+    login: PropTypes.string,
+    services: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.string,
+      link: PropTypes.string,
+      description: PropTypes.string,
+      imgUrl: PropTypes.string
+    }))
+  }),
+  delUserForUpdate: PropTypes.func
 };
 
 const setServiceList = (arServices) => {

@@ -11,14 +11,13 @@ function signIn(username, password) {
           dispatch(success(user));
         },
         error => {
-          console.log(error)
           dispatch(failure(error));
         }
       );
   };
 
   function request(user) { return { type: authConstants.LOGIN_REQUEST, user } }
-  function success(user) { return { type: authConstants.LOGIN_SUCCESS, user: user } }
+  function success(user) { return { type: authConstants.LOGIN_SUCCESS, user } }
   function failure(error) { return { type: authConstants.LOGIN_FAILURE, error } }
 }
 

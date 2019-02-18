@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class DashboardItem extends Component {
@@ -21,5 +22,12 @@ class DashboardItem extends Component {
     )
   }
 }
+
+DashboardItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired
+};
 
 export default DashboardItem;

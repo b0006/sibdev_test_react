@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import DashboardItem from './DashboardItem';
 import { dashboardActions } from "../../actions";
 
-class Index extends Component {
+class Dashboard extends Component {
 
   componentDidMount() {
     const { getServiceData, match } = this.props;
@@ -24,7 +25,7 @@ class Index extends Component {
           {
             serviceList.map(item => (
               <DashboardItem
-                key={'dash_' + item.value}
+                key={`dash_${  item.value}`}
                 title={item.name}
                 imgUrl={item.imgUrl}
                 desc={item.description}
@@ -38,6 +39,22 @@ class Index extends Component {
   }
 }
 
+Dashboard.propTypes = {
+  getServiceData: PropTypes.func.isRequired,
+  match: PropTypes.any.isRequired,
+  serviceList: PropTypes.arrayOf(PropTypes.shape({
+    description: PropTypes.string,
+    imgUrl: PropTypes.string,
+    link: PropTypes.string,
+    name: PropTypes.string,
+    value: PropTypes.string
+  })).isRequired,
+  activeUser: PropTypes.shape({
+    fullname: PropTypes.string,
+    login: PropTypes.string
+  }).isRequired
+};
+
 const mapStateToProps = (state) => {
   const { serviceList, activeUser } = state.dashboard;
   return {
@@ -50,5 +67,5 @@ const mapDispatchToProps = {
   getServiceData: dashboardActions.getServiceData
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Index));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
 

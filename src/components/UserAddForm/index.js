@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { usersActions } from "../../actions";
 import serviceStatic from "../../serviceStatic";
 
@@ -58,11 +59,13 @@ class UserAddForm extends Component {
   };
 
   render() {
-    const { error } = this.props;
+    const { error, errorMsg } = this.props;
     const { submitted, serviceList } = this.state;
     const errorService = submitted && serviceList.length === 0
       ? <span>Choose service</span>
       : null;
+
+    const errortext = error ? errorMsg : null;
 
     return (
       <div>
@@ -72,37 +75,40 @@ class UserAddForm extends Component {
         >
           <fieldset className="uk-fieldset">
             <legend className="uk-legend">New user</legend>
-            {error}
+            {errortext}
             {errorService}
             <div className="uk-margin uk-width-1-2@m">
-              <label className="uk-form-label">Fullname</label>
-              <div className="uk-form-controls">
-                <input className="uk-input" type="text" onChange={this.onFullnameChange} />
-              </div>
+              <label htmlFor="add_fullname" className="uk-form-label">
+                Fullname
+                <div className="uk-form-controls">
+                  <input id="add_fullname" className="uk-input" type="text" onChange={this.onFullnameChange} />
+                </div>
+              </label>
             </div>
 
             <div className="uk-margin uk-width-1-2@m">
-              <label className="uk-form-label">Login</label>
-              <div className="uk-form-controls">
-                <input className="uk-input" type="text" onChange={this.onLoginChange} />
-              </div>
+              <label htmlFor="add_login" className="uk-form-label">
+                Login
+                <div className="uk-form-controls">
+                  <input id="add_login" className="uk-input" type="text" onChange={this.onLoginChange} />
+                </div>
+              </label>
             </div>
 
             <div className="uk-margin uk-width-1-2@m">
-              <label className="uk-form-label">Services</label>
-              <div className="uk-form-controls" onChange={this.onServiceChange}>
-                {
-                  serviceStatic.map(item => (
-                    <label key={item.value}>
-                      <input type="checkbox"
-                             className="uk-checkbox"
-                             value={item.value}
-                      />
-                      {item.name}
-                    </label>
-                  ))
-                }
-              </div>
+              <label htmlFor="add_services" className="uk-form-label">
+                Services
+                <div id="add_services" className="uk-form-controls" onChange={this.onServiceChange}>
+                  {
+                    serviceStatic.map(item => (
+                      <label htmlFor={item.value} key={item.value}>
+                        <input id={item.value} type="checkbox" className="uk-checkbox" value={item.value} />
+                        {item.name}
+                      </label>
+                    ))
+                  }
+                </div>
+              </label>
             </div>
 
           </fieldset>
@@ -113,6 +119,11 @@ class UserAddForm extends Component {
     )
   }
 }
+
+UserAddForm.propTypes = {
+  add: PropTypes.func.isRequired,
+  error: PropTypes.string
+};
 
 const setServiceList = (arServices) => {
   return serviceStatic.filter(item =>

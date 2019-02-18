@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 import { authActions, usersActions } from "../../actions";
 
 import UserListMenu from '../UserListMenu';
@@ -40,6 +41,23 @@ class Navbar extends Component {
     )
   }
 }
+
+Navbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  removeAll: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    login: PropTypes.string,
+    password: PropTypes.string,
+    services: PropTypes.arrayOf(PropTypes.shape({
+      description: PropTypes.string,
+      name: PropTypes.string,
+      imgUrl: PropTypes.string,
+      desc: PropTypes.string,
+      link: PropTypes.string
+    }))
+  }).isRequired
+};
 
 const mapStateToProps = (state) => {
   const { loggedIn, user } = state.authentication;
