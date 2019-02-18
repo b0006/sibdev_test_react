@@ -43,7 +43,7 @@ class LoginPage extends Component {
         <h2>Login page</h2>
         <div className="uk-margin">
           <div className="uk-inline">
-            <span className="uk-form-icon" uk-icon="icon: user"></span>
+            <span className="uk-form-icon" data-uk-icon="icon: user"></span>
             <input className="uk-input"
                    type="text"
                    placeholder="Login"
@@ -54,9 +54,9 @@ class LoginPage extends Component {
 
         <div className="uk-margin">
           <div className="uk-inline">
-            <span className="uk-form-icon" uk-icon="icon: lock"></span>
+            <span className="uk-form-icon" data-uk-icon="icon: lock"></span>
             <input className="uk-input"
-                   type="text"
+                   type="password"
                    placeholder="Password"
                    onChange={this.onPassword}
             />

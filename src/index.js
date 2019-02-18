@@ -7,9 +7,6 @@ import App from './components/App';
 import ErrorBoundry from './components/ErrorBoundry';
 import store from './store';
 
-// import { AuthServiceProvider, SwapiServiceProvider } from "./components/context";
-// import { AuthService, SwapiService } from "./services";
-
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundry>
