@@ -4,6 +4,7 @@ import { compose, bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { swapiActions, catsActions, punksActions } from "../../actions";
 import Spinner from '../Spinner';
+import {Redirect} from "react-router-dom";
 
 class ItemList extends Component {
   componentDidMount() {
@@ -25,6 +26,11 @@ class ItemList extends Component {
   }
 
   render() {
+    const { loggedIn } = this.props;
+    if(!loggedIn) {
+      return <Redirect to="/login" />
+    }
+
     const {
       type,
       swPeople,
@@ -105,13 +111,15 @@ const mapStateToProps = (state) => {
   const { swPeople, swLoading } = state.swapi;
   const { catFacts, catsLoading } = state.cats;
   const { beers, punkLoading } = state.punks;
+  const { loggedIn } = state.authentication;
   return {
     swPeople,
     catFacts,
     beers,
     swLoading,
     catsLoading,
-    punkLoading
+    punkLoading,
+    loggedIn
   };
 };
 

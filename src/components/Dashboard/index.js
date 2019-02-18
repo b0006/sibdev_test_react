@@ -23,6 +23,7 @@ class Dashboard extends Component {
         <h2>{activeUser.fullname}</h2>
         <div id="search-results-grid" className="uk-child-width-1-3@m" data-uk-grid>
           {
+
             serviceList.map(item => (
               <DashboardItem
                 key={`dash_${  item.value}`}

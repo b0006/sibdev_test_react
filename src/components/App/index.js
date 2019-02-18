@@ -17,12 +17,12 @@ class App extends Component {
           <Route path="/login" component={LoginPage} />
           <Route path="/logout" component={StartPage} />
 
-          <Route path="/dash/:login/" component={DashboardPage} />
+          <Route path="/dash/:login/" exact component={DashboardPage} />
           <Route path="/settings" component={SettingPage} />
 
           {
             serviceStatic.map(service => (
-              <Route key={`link_${service.value}`} path={"/" + service.value} exact render={() => (<ItemList type={service.value} />)} />
+              <Route key={`link_${service.value}`} path={"/dash/:login/" + service.value} render={() => (<ItemList type={service.value} />)} />
             ))
           }
         </Switch>
